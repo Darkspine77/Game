@@ -53,7 +53,7 @@ if(millis() > spawnTimer){
   xpos = 50
   }
   console.log("spawned")
-  enemies.push(new enemy(xpos,windowHeight - 50,1))
+  enemies.push(new enemy(xpos,players[0].sprite.position.y,1))
   spawnTimer = millis() + 1000
 }
 }
