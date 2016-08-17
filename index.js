@@ -149,6 +149,7 @@ function enemy(x,y,health1){
     console.log(this.health)
     if(this.health <= 0 ){
       enemies.splice(enemies.indexOf(this),1)
+      remove(this.sprite)
       kills += 1
       exp += this.maxHealth
     }
