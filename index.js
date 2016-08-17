@@ -25,7 +25,6 @@ function draw(){
   text(health,windowWidth/2, 50)
   fill(0,255,0)
     text(kills,windowWidth/2, 100)
-    text(spawnTimer,windowWidth/2, 150)
     players[0].run()
     drawSprite(players[0].sprite)
     spawnEnemy()
@@ -53,7 +52,6 @@ if(millis() > spawnTimer){
   if(choice == 2){
   xpos = 50
   }
-  console.log("spawned")
   enemies.push(new enemy(xpos,players[0].sprite.position.y,1))
   spawnTimer = millis() + 1000 - kills * 5
 }
@@ -146,10 +144,8 @@ function enemy(x,y,health1){
     this.move() 
     this.attack()
     this.collide()
-    console.log(this.health)
     if(this.health <= 0 ){
       enemies.splice(enemies.indexOf(this),1)
-      remove(this.sprite)
       kills += 1
       exp += this.maxHealth
     }
