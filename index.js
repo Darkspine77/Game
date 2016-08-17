@@ -54,7 +54,7 @@ if(millis() > spawnTimer){
   }
   console.log("spawned")
   enemies.push(new enemy(xpos,players[0].sprite.position.y,1))
-  spawnTimer = millis() + 1000
+  spawnTimer = millis() + 1000 - kills * 5
 }
 }
 
@@ -87,7 +87,7 @@ function player(x,y){
         dir = 3
       }
       pellets.push(new pellet(this.sprite.position.x,this.sprite.position.y,dir,0,1))
-      this.shootDelay = millis() + 1000
+      this.shootDelay = millis() + 1000 - kills * 5
     }
   }
 
