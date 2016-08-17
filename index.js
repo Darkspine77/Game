@@ -22,10 +22,11 @@ function draw(){
   fill(255,0,0)
   textSize(48)
   background(255)
-  console.log(spawnTimer)
+  t
   text(health,windowWidth/2, 50)
   fill(0,255,0)
     text(kills,windowWidth/2, 100)
+    text(spawnTimer,windowWidth/2, 150)
     players[0].run()
     drawSprite(players[0].sprite)
     spawnEnemy()
