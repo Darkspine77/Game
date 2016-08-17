@@ -22,7 +22,6 @@ function draw(){
   fill(255,0,0)
   textSize(48)
   background(255)
-  t
   text(health,windowWidth/2, 50)
   fill(0,255,0)
     text(kills,windowWidth/2, 100)
