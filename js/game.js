@@ -96,7 +96,7 @@ function player(x,y){
   }
 
   this.controls = function(){ 
-  if(touchIsDown){
+  if(touchIsDown || mouseIsPressed){
       if(this.aimCoords.x > this.sprite.position.x){
         this.facing = 'R'
       }
