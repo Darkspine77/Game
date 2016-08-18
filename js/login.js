@@ -7,7 +7,7 @@
   };
   firebase.initializeApp(config);
 
-        // FirebaseUI config.
+
       var uiConfig = {
         'signInSuccessUrl': '<url-to-redirect-to-on-success>',
         'signInOptions': [
