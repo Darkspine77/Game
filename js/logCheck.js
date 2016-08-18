@@ -21,7 +21,7 @@
             var providerData = user.providerData;
             user.getToken().then(function(accessToken) {
               document.getElementById('sign-in-status').textContent = 'Signed in';
-              console.log(JSON)
+              document.getElementById('greeting').textContent = "Welcome Back " + displayName
             });
           } else {
             // User is signed out.
