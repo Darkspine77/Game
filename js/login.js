@@ -9,7 +9,7 @@
 
 
       var uiConfig = {
-        'signInSuccessUrl': '<url-to-redirect-to-on-success>',
+        'signInSuccessUrl': 'game.html',
         'signInOptions': [
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.EmailAuthProvider.PROVIDER_ID
