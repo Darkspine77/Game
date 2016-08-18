@@ -14,7 +14,7 @@ function setup(){
 canvas = createCanvas(windowWidth,windowHeight) 
 ground = createSprite(windowWidth/2,windowHeight,windowWidth,50)
 terrain.push(ground)
-player = new player(windowWidth/2,windowHeight - 50)
+player = new player(windowWidth/2,windowHeight/2)
 players.push(player)
 }
 
@@ -52,7 +52,7 @@ if(millis() > spawnTimer){
   if(choice == 2){
   xpos = 50
   }
-  enemies.push(new enemy(xpos,players[0].sprite.position.y,1))
+  enemies.push(new enemy(xpos,windowHeight/2,1))
   spawnTimer = millis() + 1000 - kills * 5
 }
 }
@@ -64,7 +64,6 @@ function player(x,y){
   this.facing = 'L' 
   this.aimCoords = {
       'x': 0,
-      'y': 0
     }
   this.shootDelay = 0 
 
@@ -73,7 +72,7 @@ function player(x,y){
     this.controls()
     this.attack()
     this.aimCoords.x = touchX
-    this.aimCoords.y = touchY
+    this.aimCoords.x = mouseX
   } 
 
   this.attack = function(){
