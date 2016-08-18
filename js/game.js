@@ -76,7 +76,8 @@ function player(x,y){
   } 
 
   this.attack = function(){
-    if(millis() > this.shootDelay && touchIsDown){
+    pressed = touchIsDown || mouseIsPressed 
+    if(millis() > this.shootDelay && pressed){
       dir = 0
       if(this.facing == 'L'){
         dir = -3
