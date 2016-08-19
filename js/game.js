@@ -9,22 +9,59 @@ spawnDelay = 0
 health = 0
 enemiesLeft = 0 
 spawnTimer = 0 
+gameStatus = ""
+levelTimer = 0
+totalExp = 0
+completionTime = 0
 
 function setup(){
-canvas = createCanvas(windowWidth,windowHeight) 
+gameStatus = "Menu"
+canvas = createCanvas(windowWidth,windowHeight)
+canvas.parent('canvas');  
 ground = createSprite(windowWidth/2,windowHeight,windowWidth,50)
 terrain.push(ground)
 player = new player(windowWidth/2,windowHeight/2)
 players.push(player)
+  start = createButton('click me');
+  start.id('start')
+  start.parent('HUD')
+  start.mousePressed(gameStart);
+      start.show()
+}
+
+function gameStart(){
+  experience = 0
+  gameStatus = 'Playing'
+  levelTimer = millis() 
+  health = 10
+  enemiesLeft = 20
+  start.hide()
 }
 
 function draw(){
-  fill(255,0,0)
+  if(gameStatus == "Playing"){
+
+    runGame()
+  }
+  if(gameStatus == "Menu"){
+    runMenu()
+  }
+  if(gameStatus == "Win"){
+    runMenu()
+  }
+}
+
+function runMenu(){
+
+}
+
+function runGame(){
+   fill(255,0,0)
   textSize(48)
   background(255)
   text(health,windowWidth/2, 50)
   fill(0,255,0)
-    text(kills,windowWidth/2, 100)
+    text(enemiesLeft,windowWidth/2, 100)
     players[0].run()
     drawSprite(players[0].sprite)
     spawnEnemy()
@@ -36,10 +73,20 @@ function draw(){
       drawSprite(enemies[i].sprite)
       enemies[i].run()
     }
-    // if(millis() > spawnDelay){
-    //   enemies.push(new enemy(0,windowHeight - 50,2))
-    //   spawnDelay = millis() + 1000
-    // }
+    endGame()
+}
+
+function endGame(){
+if(health <= 0){
+gameStatus = "Lose"
+}
+if(enemiesLeft <= 0){
+start.show()
+gameStatus = "Win"
+completionTime = millis() - levelTimer
+totalExp += experience
+document.getElementById('results').textContent = "You completed the level in " + completionTime + "! You gained " + experience + " from this level and now have " + totalExp + " experience."
+}
 }
 
 function spawnEnemy(){
@@ -53,7 +100,7 @@ if(millis() > spawnTimer){
   xpos = 50
   }
   enemies.push(new enemy(xpos,windowHeight/2,1))
-  spawnTimer = millis() + 1000 - kills * 5
+  spawnTimer = millis() + 1000 
 }
 }
 
@@ -86,7 +133,7 @@ function player(x,y){
         dir = 3
       }
       pellets.push(new pellet(this.sprite.position.x,this.sprite.position.y,dir,0,1))
-      this.shootDelay = millis() + 1000 - kills * 5
+      this.shootDelay = millis() + 1000 
     }
   }
 
@@ -131,6 +178,7 @@ function enemy(x,y,health1){
   this.sprite = createSprite(x,y,25,25) 
   this.xvel = 0
   this.yvel = 0
+  this.size1 = 25
   this.health = health1 
   this.maxHealth = health1
   if(this.sprite.position.x > players[0].sprite.position.x){
@@ -144,11 +192,23 @@ function enemy(x,y,health1){
     this.move() 
     this.attack()
     this.collide()
+    this.drawHealth()
     if(this.health <= 0 ){
       enemies.splice(enemies.indexOf(this),1)
       kills += 1
-      exp += this.maxHealth
+      enemiesLeft -= 1
+      experience += this.maxHealth
     }
+  }
+
+    this.drawHealth = function(){
+      strokeWeight(4);
+      stroke(255, 0, 0);
+      line(this.sprite.position.x-this.size1, this.sprite.position.y-this.size1, this.sprite.position.x+this.size1, this.sprite.position.y-this.size1); 
+      stroke(0, 255, 0);
+      line(this.sprite.position.x-this.size1, this.sprite.position.y-this.size1, (this.health*((this.sprite.position.x+this.size1)-(this.sprite.position.x-this.size1)))/this.maxHealth + (this.sprite.position.x-this.size1), this.sprite.position.y-this.size1);  
+      stroke(0, 0, 0);
+      strokeWeight(1);
   } 
 
   this.collide = function(){
@@ -168,7 +228,7 @@ function enemy(x,y,health1){
   }
 
   this.move = function(){
-    this.sprite.position.x += this.xvel
-    this.sprite.position.y += this.yvel
+    this.sprite.position.x += this.xvel;
+    this.sprite.position.y += this.yvel;
   }
 }

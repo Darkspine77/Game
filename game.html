@@ -3,12 +3,14 @@
 <html>
   <head>
   	 <meta charset="UTF-8">
+      <link rel="stylesheet" href="css/game.css">
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
   <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
   <script language="javascript" type="text/javascript" src="libraries/p5.play.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
   <script src="js/game.js"></script>
+
   <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
   <script type="text/javascript" src="js/logCheck.js"></script>
   <script type="text/javascript" src="js/game.js"></script>
@@ -17,7 +19,11 @@
     <title>Lone Solider - Play!</title>
   </head>
   <body>
-    <div id="sign-in-status"></div>
+    <div id='HUD'>
+   	<div id="sign-in-status"></div>
     <div id="greeting"></div>
+    <p id="results"></p>
+    </div>
+    <div id='canvas'></div>
   </body>
 </html>
