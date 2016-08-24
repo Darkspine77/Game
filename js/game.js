@@ -5,6 +5,7 @@ enemies = []
 experience = 0 
 level = 0 
 kills = 0
+leveldrops = []
 spawnDelay = 0
 enemiesLeft = 0 
 spawnTimer = 0 
@@ -13,7 +14,7 @@ levelTimer = 0
 completionTime = 0
 currentSP = null
 
-function setup(){
+function setup(){   // Hide
 currentSP = new statProfile()
 gameStatus = "Menu"
 canvas = createCanvas(windowWidth,windowHeight)
@@ -232,6 +233,23 @@ function enemy(x,y,health1){
       enemies.splice(enemies.indexOf(this),1)
       kills += 1
       enemiesLeft -= 1
+      dropStats = ['This is a test item']
+      drop = new item('resource','test',dropStats,-1);
+      obj = {
+        item: drop,
+        quantity: 1
+      };
+      if(leveldrops.length != 0){
+        for (var i = leveldrops.length - 1; i >= 0; i--) {
+          if(leveldrops[i].drop = drop){
+            leveldrops[i].quantity += obj.quantity
+          } else {
+            leveldrops.push(obj)
+          }
+        }
+      } else {
+        leveldrops.push(obj)
+      }
       experience += this.maxHealth
       this.sprite.remove()
     }
@@ -267,4 +285,12 @@ function enemy(x,y,health1){
     this.sprite.position.x += this.xvel;
     this.sprite.position.y += this.yvel;
   }
+}
+
+function item(def,name,stats,durability){
+  this.name = name
+  this.stats = stats
+  this.maxDurability = durability
+  this.durability = durability
+  this.def = def 
 }
