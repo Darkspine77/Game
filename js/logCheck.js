@@ -14,7 +14,6 @@
           if (user) {
             // User is signed in.
             User = user
-            console.log(User)
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
@@ -33,6 +32,7 @@
           console.log(error);
         });
       };
+          console.log(User)
 
       window.addEventListener('load', function() {
         initApp()
