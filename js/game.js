@@ -14,6 +14,8 @@ levelTimer = 0
 completionTime = 0
 currentSP = null
 //SP = status profile
+sessionUser = User
+console.log(sessionUser)
 
   // Initialize Firebase
   var config = {
@@ -105,10 +107,11 @@ gameStatus = "Lose"
 background(255)
 }
 if(enemiesLeft <= 0){
+
   firebase.database().ref('players').push({
-                'User': sessionUser,
-                'SP': currentSP
+                'Username': user
             });
+console.log('finished')
 menuButtons.show()
 gameStatus = "Win"
 completionTime = Math.round((millis() - levelTimer)/1000)
