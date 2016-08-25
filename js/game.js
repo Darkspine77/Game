@@ -13,6 +13,17 @@ gameStatus = ""
 levelTimer = 0
 completionTime = 0
 currentSP = null
+//SP = status profile
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDD-AmEnz70-xxCoQwX0f0D6jn0BH4es08",
+    authDomain: "lone-solider.firebaseapp.com",
+    databaseURL: "https://lone-solider.firebaseio.com",
+    storageBucket: "lone-solider.appspot.com",
+  };
+  firebase.initializeApp(config);
+
 
 function setup(){   // Hide
 currentSP = new statProfile()
@@ -94,6 +105,10 @@ gameStatus = "Lose"
 background(255)
 }
 if(enemiesLeft <= 0){
+  firebase.database().ref('players').push({
+                'User': sessionUser,
+                'SP': currentSP
+            });
 menuButtons.show()
 gameStatus = "Win"
 completionTime = Math.round((millis() - levelTimer)/1000)
@@ -124,167 +139,6 @@ function statProfile(){
   this.damage = 1
   this.bulletSpeed = 3 
   this.totalExp = 0
-}
-
-function player(x,y){
-  this.sprite = createSprite(x,y,25,25) 
-  this.size1 = 25
-  this.xvel = 0
-  this.yvel = 0
-  this.facing = 'L' 
-  this.aimCoords = {
-      'x': 0,
-    }
-  this.shootDelay = 0
-  this.stats = currentSP
-  console.log(this.stats)
-
-  this.run = function(){
-    this.move() 
-    this.controls()
-    this.attack()
-    this.aimCoords.x = touchX
-    this.aimCoords.x = mouseX
-  }
-
-  this.drawHealth = function(){
-      strokeWeight(4);
-      stroke(255, 0, 0);
-      line(this.sprite.position.x-this.size1, this.sprite.position.y-this.size1, this.sprite.position.x+this.size1, this.sprite.position.y-this.size1); 
-      stroke(0, 255, 0);
-      line(this.sprite.position.x-this.size1, this.sprite.position.y-this.size1, (this.stats.health*((this.sprite.position.x+this.size1)-(this.sprite.position.x-this.size1)))/this.sprites.maxHealth + (this.sprite.position.x-this.size1), this.sprite.position.y-this.size1);  
-      stroke(0, 0, 0);
-      strokeWeight(1);
-  } 
- 
-
-  this.attack = function(){
-    pressed = touchIsDown || mouseIsPressed 
-    if(millis() > this.shootDelay && pressed){
-      dir = 0
-      if(this.facing == 'L'){
-        dir = -1 * this.stats.bulletSpeed
-      }
-      if(this.facing == 'R'){
-        dir = 1 * this.stats.bulletSpeed
-      }
-      pellets.push(new pellet(this.sprite.position.x,this.sprite.position.y,dir,0,1))
-      this.shootDelay = millis() + this.stats.fireDelay
-    }
-  }
-
-  this.move = function(){
-    this.sprite.position.x += this.xvel
-    this.sprite.position.y += this.yvel
-  }
-
-  this.controls = function(){ 
-  if(touchIsDown || mouseIsPressed){
-      if(this.aimCoords.x > this.sprite.position.x){
-        this.facing = 'R'
-      }
-      if(this.aimCoords.x < this.sprite.position.x){
-        this.facing = 'L'
-      }
-    }
-  }
-}
-
-
-function pellet(x,y,xvel1,yvel1,damage1){
-  this.sprite = createSprite(x,y,10,10) 
-  this.xvel = xvel1
-  this.yvel = yvel1
-  this.damage = damage1 
-
-  this.run = function(){
-    this.move() 
-    if(this.sprite.position.x > windowWidth || this.sprite.position.x < 0){
-      pellets.splice(pellets.indexOf(this),1)
-    }
-  } 
-
-  this.move = function(){
-    this.sprite.position.x += this.xvel
-    this.sprite.position.y += this.yvel
-  }
-} 
-
-function enemy(x,y,health1){ 
-  this.sprite = createSprite(x,y,25,25) 
-  this.xvel = 0
-  this.yvel = 0
-  this.size1 = 25
-  this.health = health1 
-  this.maxHealth = health1
-  if(this.sprite.position.x > players[0].sprite.position.x){
-  this.xvel = -3
-  } 
-  if(this.sprite.position.x < players[0].sprite.position.x){
-  this.xvel = 3
-  } 
-
-  this.run = function(){
-    this.move() 
-    this.attack()
-    this.collide()
-    this.drawHealth()
-    if(this.health <= 0 ){
-      enemies.splice(enemies.indexOf(this),1)
-      kills += 1
-      enemiesLeft -= 1
-      dropStats = ['This is a test item']
-      drop = new item('resource','test',dropStats,-1);
-      obj = {
-        item: drop,
-        quantity: 1
-      };
-      if(leveldrops.length != 0){
-        for (var i = leveldrops.length - 1; i >= 0; i--) {
-          if(leveldrops[i].drop = drop){
-            leveldrops[i].quantity += obj.quantity
-          } else {
-            leveldrops.push(obj)
-          }
-        }
-      } else {
-        leveldrops.push(obj)
-      }
-      experience += this.maxHealth
-      this.sprite.remove()
-    }
-  }
-
-    this.drawHealth = function(){
-      strokeWeight(4);
-      stroke(255, 0, 0);
-      line(this.sprite.position.x-this.size1, this.sprite.position.y-this.size1, this.sprite.position.x+this.size1, this.sprite.position.y-this.size1); 
-      stroke(0, 255, 0);
-      line(this.sprite.position.x-this.size1, this.sprite.position.y-this.size1, (this.health*((this.sprite.position.x+this.size1)-(this.sprite.position.x-this.size1)))/this.maxHealth + (this.sprite.position.x-this.size1), this.sprite.position.y-this.size1);  
-      stroke(0, 0, 0);
-      strokeWeight(1);
-  } 
-
-  this.collide = function(){
-    for (var i = pellets.length - 1; i >= 0; i--) {
-      if(this.sprite.overlap(pellets[i].sprite)){
-        this.health -= pellets[i].damage
-        pellets.splice(i,1) 
-      }
-    }
-  }
-
-  this.attack = function(){
-    if(this.sprite.overlap(players[0].sprite)){
-      players[0].stats.health -= 1
-      enemies.splice(enemies.indexOf(this),1)
-    }
-  }
-
-  this.move = function(){
-    this.sprite.position.x += this.xvel;
-    this.sprite.position.y += this.yvel;
-  }
 }
 
 function item(def,name,stats,durability){

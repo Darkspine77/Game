@@ -1,4 +1,6 @@
   // Initialize Firebase
+  var sessionUser 
+
   var config = {
     apiKey: "AIzaSyDD-AmEnz70-xxCoQwX0f0D6jn0BH4es08",
     authDomain: "lone-solider.firebaseapp.com",
@@ -13,6 +15,7 @@
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             // User is signed in.
+            sessionUser = User
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
