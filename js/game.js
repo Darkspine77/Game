@@ -17,6 +17,10 @@ totalExp = 0
 //SP = status profile
 
   // Initialize Firebase
+
+
+function setup(){   // Hide
+
   var config = {
     apiKey: "AIzaSyDD-AmEnz70-xxCoQwX0f0D6jn0BH4es08",
     authDomain: "lone-solider.firebaseapp.com",
@@ -29,7 +33,6 @@ totalExp = 0
   console.log(ref)
 
 
-function setup(){   // Hide
 currentSP = new statProfile()
 gameStatus = "Menu"
 canvas = createCanvas(windowWidth,windowHeight)
