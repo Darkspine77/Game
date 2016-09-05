@@ -14,7 +14,7 @@ levelTimer = 0
 completionTime = 0
 currentSP = null
 totalExp = 0
-user = firebase.auth()
+user = firebase.auth().currentUser
 console.log(user)
 //SP = status profile
 
