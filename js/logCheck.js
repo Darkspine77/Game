@@ -1,5 +1,5 @@
   // Initialize Firebase
-  var sessionUser 
+  var User
 
   var config = {
     apiKey: "AIzaSyDD-AmEnz70-xxCoQwX0f0D6jn0BH4es08",
@@ -8,8 +8,6 @@
     storageBucket: "lone-solider.appspot.com",
   };
   firebase.initializeApp(config);
-
-
 
  initApp = function() {
         firebase.auth().onAuthStateChanged(function(user){
