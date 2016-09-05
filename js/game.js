@@ -15,6 +15,7 @@ completionTime = 0
 currentSP = null
 totalExp = 0
 user = firebase.auth().currentUser
+console.log(user.uid)
 //SP = status profile
 
   // Initialize Firebase
