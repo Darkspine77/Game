@@ -15,9 +15,16 @@ completionTime = 0
 currentSP = null
 totalExp = 0
 
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+  var User = firebase.auth().currentUser;
+  console.log(User)
+  } else {
+   console.log('no user loaded')
+  }
+});
+
 function setup(){   // Hide
-var user = firebase.auth().currentUser;
-console.log(user)
 currentSP = new statProfile()
 gameStatus = "Menu"
 canvas = createCanvas(windowWidth,windowHeight)
