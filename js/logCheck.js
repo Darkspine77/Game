@@ -8,7 +8,7 @@
     storageBucket: "lone-solider.appspot.com",
   };
   firebase.initializeApp(config);
-  console.log(firebase.getAuth()
+  console.log(firebase.getAuth())
 
 
  initApp = function() {
