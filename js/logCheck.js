@@ -24,7 +24,6 @@
               document.getElementById('sign-in-status').textContent = 'Signed in';
               document.getElementById('greeting').textContent = "Welcome Back " + displayName
             });
-            console.log(User)
           } else {
 
             // User is signed out.
@@ -35,6 +34,8 @@
         });
       };
 
+
       window.addEventListener('load', function() {
+        console.log(User)
         initApp()
       });
