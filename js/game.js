@@ -14,14 +14,8 @@ levelTimer = 0
 completionTime = 0
 currentSP = null
 totalExp = 0
-User = firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    return user.uid;
-  } else {
-    console.log('no user found')
-    return null
-  }
-});
+User = null
+firebase.auth().onAuthStateChanged(User = user);
 console.log(User)
 
 function setup(){   // Hide
