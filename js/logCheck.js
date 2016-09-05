@@ -36,6 +36,6 @@
 
 
       window.addEventListener('load', function() {
-        console.log(User)
         initApp()
+                console.log(User)
       });
