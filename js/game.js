@@ -25,10 +25,7 @@ totalExp = 0
   };
   firebase.initializeApp(config);
 
-
-function setup(){   // Hide
-
-var ref = new Firebase("https://lone-solider.firebaseapp.com");
+  var ref = new Firebase("https://lone-solider.firebaseapp.com");
 ref.onAuth(function(authData) {
   if (authData) {
     // save the user's profile into the database so we can list users,
@@ -47,6 +44,8 @@ function getName(authData) {
   }
 }
 
+
+function setup(){   // Hide
 currentSP = new statProfile()
 gameStatus = "Menu"
 canvas = createCanvas(windowWidth,windowHeight)
