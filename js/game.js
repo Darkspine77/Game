@@ -26,24 +26,7 @@ totalExp = 0
   firebase.initializeApp(config);
 
   var ref = firebase.auth()
-ref.onAuth(function(authData) {
-  console.log('run')
-  if (authData) {
-    // save the user's profile into the database so we can list users,
-    // use them in Security and Firebase Rules, and show profiles
-    ref.child("users").child(authData.uid).set({
-      provider: authData.provider,
-      name: getName(authData)
-    });
-  }
-});
-// find a suitable name based on the meta info given by each provider
-function getName(authData) {
-  switch(authData.provider) {
-     case 'password':
-       return authData.password.email.replace(/@.*/, '');
-  }
-}
+  console.log(ref)
 
 
 function setup(){   // Hide
