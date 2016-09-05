@@ -109,14 +109,15 @@ if(players[0].stats.health <= 0){
 gameStatus = "Lose"
 background(255)
 }
-if(enemiesLeft <= 0){
-  firebase.database().ref('players/' + user.uid).push({
-                'SP': currentSP
-            });
 menuButtons.show()
 gameStatus = "Win"
 completionTime = Math.round((millis() - levelTimer)/1000)
-totalExp += experience
+currentSP.totalExp += experience
+if(enemiesLeft <= 0){
+  firebase.database().ref('players/' + user.uid).push({
+                'Stat Profile': currentSP
+});
+consoel.log(leveldrops)
 document.getElementById('results').textContent = "You completed the level in " + completionTime + "seconds! You gained " + experience + " from this level and now have " + totalExp + " experience."
 }
 }
