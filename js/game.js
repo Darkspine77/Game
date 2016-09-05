@@ -14,7 +14,7 @@ levelTimer = 0
 completionTime = 0
 currentSP = null
 totalExp = 0
-userloaded = false
+user = 0
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 function displayUser(){
-  console.log(firebase.auth().currentUser)
+  user = firebase.auth().currentUser
 }
 
 
