@@ -40,6 +40,7 @@ ref.onAuth(function(authData) {
 function getName(authData) {
   switch(authData.provider) {
      case 'password':
+      console.log(authData.password.email.replace(/@.*/, ''))
        return authData.password.email.replace(/@.*/, '');
   }
 }
