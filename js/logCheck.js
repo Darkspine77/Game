@@ -12,10 +12,10 @@
 
 
  initApp = function() {
-        firebase.auth().onAuthStateChanged(function(user) {
+        firebase.auth().onAuthStateChanged(function(user){
           if (user) {
+           console.log(user)
             // User is signed in.
-            sessionUser = User
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
@@ -27,6 +27,8 @@
               document.getElementById('greeting').textContent = "Welcome Back " + displayName
             });
           } else {
+            console.log("no user data avaliable")
+
             // User is signed out.
             document.getElementById('sign-in-status').textContent = 'Signed out';
           }

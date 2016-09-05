@@ -13,6 +13,7 @@ gameStatus = ""
 levelTimer = 0
 completionTime = 0
 currentSP = null
+totalExp = 0
 //SP = status profile
 
   // Initialize Firebase
@@ -105,8 +106,7 @@ gameStatus = "Lose"
 background(255)
 }
 if(enemiesLeft <= 0){
-  firebase.database().ref('players').push({
-                'User': sessionUser,
+  firebase.database().ref('players/').push({
                 'SP': currentSP
             });
 menuButtons.show()
