@@ -14,10 +14,14 @@ levelTimer = 0
 completionTime = 0
 currentSP = null
 totalExp = 0
+user = firebase.auth().currentUser
 //SP = status profile
 
   // Initialize Firebase
-console.log(firebase.auth())
+if(user == null){
+document.location = "index.html"
+}
+
 
 function setup(){   // Hide
 currentSP = new statProfile()
@@ -99,7 +103,7 @@ gameStatus = "Lose"
 background(255)
 }
 if(enemiesLeft <= 0){
-  firebase.database().ref('players/').push({
+  firebase.database().ref('players/' + user.uid).push({
                 'SP': currentSP
             });
 menuButtons.show()
