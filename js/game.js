@@ -14,14 +14,15 @@ levelTimer = 0
 completionTime = 0
 currentSP = null
 totalExp = 0
-
-firebase.auth().onAuthStateChanged(function(user) {
+User = firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    console.log(user)
+    return user;
   } else {
-    console.log*'no user found'
+    console.log('no user found')
+    return null
   }
 });
+console.log(User)
 
 function setup(){   // Hide
 currentSP = new statProfile()
