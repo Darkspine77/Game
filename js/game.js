@@ -27,7 +27,6 @@ totalExp = 0
 
 
 function setup(){   // Hide
-console.log(firebase.getAuth())
 currentSP = new statProfile()
 gameStatus = "Menu"
 canvas = createCanvas(windowWidth,windowHeight)
