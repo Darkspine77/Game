@@ -17,9 +17,9 @@ totalExp = 0
 //SP = status profile
 
   // Initialize Firebase
-  var ref = firebase.auth()
+  var ref = firebase
   console.log(ref)
-  ref.onAuth(function(authData) {
+  onAuth(function(authData) {
   if (authData && isNewUser) {
     // save the user's profile into the database so we can list users,
     // use them in Security and Firebase Rules, and show profiles
