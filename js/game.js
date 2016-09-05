@@ -16,7 +16,7 @@ currentSP = null
 totalExp = 0
 User = firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    return user;
+    return user.uid;
   } else {
     console.log('no user found')
     return null
