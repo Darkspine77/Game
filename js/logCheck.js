@@ -38,5 +38,4 @@
 
       window.addEventListener('load', function() {
         initApp()
-        console.log(firebase.auth().currentuser)
       });

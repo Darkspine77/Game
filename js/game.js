@@ -27,6 +27,26 @@ totalExp = 0
 
 
 function setup(){   // Hide
+
+var ref = new Firebase("https://lone-solider.firebaseapp.com");
+ref.onAuth(function(authData) {
+  if (authData) {
+    // save the user's profile into the database so we can list users,
+    // use them in Security and Firebase Rules, and show profiles
+    ref.child("users").child(authData.uid).set({
+      provider: authData.provider,
+      name: getName(authData)
+    });
+  }
+});
+// find a suitable name based on the meta info given by each provider
+function getName(authData) {
+  switch(authData.provider) {
+     case 'password':
+       return authData.password.email.replace(/@.*/, '');
+  }
+}
+
 currentSP = new statProfile()
 gameStatus = "Menu"
 canvas = createCanvas(windowWidth,windowHeight)
