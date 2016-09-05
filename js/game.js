@@ -14,9 +14,9 @@ levelTimer = 0
 completionTime = 0
 currentSP = null
 totalExp = 0
-User = null
-firebase.auth().onAuthStateChanged(User = user);
-console.log(User)
+
+var user = firebase.auth().currentUser;
+console.log(user)
 
 function setup(){   // Hide
 currentSP = new statProfile()
