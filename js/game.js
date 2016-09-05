@@ -17,30 +17,7 @@ totalExp = 0
 //SP = status profile
 
   // Initialize Firebase
-  var ref = firebase
-  console.log(ref)
-  onAuth(function(authData) {
-  if (authData && isNewUser) {
-    // save the user's profile into the database so we can list users,
-    // use them in Security and Firebase Rules, and show profiles
-    ref.child("users").child(authData.uid).set({
-      provider: authData.provider,
-      name: getName(authData)
-    });
-  }
-});
-// find a suitable name based on the meta info given by each provider
-function getName(authData) {
-  switch(authData.provider) {
-     case 'password':
-       return authData.password.email.replace(/@.*/, '');
-     case 'twitter':
-       return authData.twitter.displayName;
-     case 'facebook':
-       return authData.facebook.displayName;
-  }
-}
-
+console.log(firebase.auth())
 
 function setup(){   // Hide
 currentSP = new statProfile()
