@@ -27,6 +27,7 @@ totalExp = 0
 
   var ref = firebase.auth()
 ref.onAuth(function(authData) {
+  console.log('run')
   if (authData) {
     // save the user's profile into the database so we can list users,
     // use them in Security and Firebase Rules, and show profiles
