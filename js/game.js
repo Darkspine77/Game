@@ -17,14 +17,11 @@ totalExp = 0
 //SP = status profile
 
   // Initialize Firebase
-
-
-function setup(){   // Hide
-
   var ref = firebase.auth()
   console.log(ref)
 
 
+function setup(){   // Hide
 currentSP = new statProfile()
 gameStatus = "Menu"
 canvas = createCanvas(windowWidth,windowHeight)
