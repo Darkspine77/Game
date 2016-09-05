@@ -15,10 +15,9 @@ completionTime = 0
 currentSP = null
 totalExp = 0
 
+function setup(){   // Hide
 var user = firebase.auth().currentUser;
 console.log(user)
-
-function setup(){   // Hide
 currentSP = new statProfile()
 gameStatus = "Menu"
 canvas = createCanvas(windowWidth,windowHeight)
