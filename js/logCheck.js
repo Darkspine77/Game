@@ -8,7 +8,6 @@
     storageBucket: "lone-solider.appspot.com",
   };
   firebase.initializeApp(config);
-  console.log(firebase.getAuth())
 
 
  initApp = function() {
@@ -39,4 +38,5 @@
 
       window.addEventListener('load', function() {
         initApp()
+          console.log(firebase.getAuth())
       });
