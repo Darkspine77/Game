@@ -18,10 +18,6 @@ user = firebase.auth().currentUser
 //SP = status profile
 
   // Initialize Firebase
-if(user == null){
-document.location = "index.html"
-}
-
 
 function setup(){   // Hide
 currentSP = new statProfile()
