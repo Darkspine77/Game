@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged(function(user) {
    console.log('no user loaded')
   }
 });
-console.log(firebase.auth().currentUser;)
+console.log(firebase.auth().currentUser)
 
 function setup(){   // Hide
 currentSP = new statProfile()
