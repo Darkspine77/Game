@@ -25,7 +25,7 @@ totalExp = 0
   };
   firebase.initializeApp(config);
 
-  var ref = new Firebase("https://lone-solider.firebaseapp.com");
+  var ref = firebase.auth()
 ref.onAuth(function(authData) {
   if (authData) {
     // save the user's profile into the database so we can list users,
@@ -40,7 +40,6 @@ ref.onAuth(function(authData) {
 function getName(authData) {
   switch(authData.provider) {
      case 'password':
-      console.log(authData.password.email.replace(/@.*/, ''))
        return authData.password.email.replace(/@.*/, '');
   }
 }
