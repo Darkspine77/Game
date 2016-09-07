@@ -131,7 +131,7 @@ for (var i = leveldrops.length - 1; i >= 0; i--) {
     sessionInv.push(leveldrops[i]) 
   }
 }
-console.log('Seesion inv: 'sessionInv)
+console.log('Seesion inv: ' + sessionInv)
 firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP,
                 'Inventory': sessionInv
