@@ -27,6 +27,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 function displayUser(){
   user =firebase.auth().currentUser
+    firebase.database().ref('players/' + + user.uid).on('value', function(snapshot) {
+      console.log("User data")
+      console.log(snapshot)
+  }
 }
 
 
@@ -110,14 +114,15 @@ gameStatus = "Lose"
 background(255)
 }
 if(enemiesLeft <= 0){
+
 console.log(leveldrops)
-firebase.database().ref('players/' + user.uid).push({
+player[0].stats.totalExp += experience
+firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP
             });
 menuButtons.show()
 gameStatus = "Win"
 completionTime = Math.round((millis() - levelTimer)/1000)
-totalExp += experience
 document.getElementById('results').textContent = "You completed the level in " + completionTime + "seconds! You gained " + experience + " from this level and now have " + totalExp + " experience."
 }
 }
