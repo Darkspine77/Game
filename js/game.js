@@ -122,7 +122,7 @@ players[0].stats.totalExp += experience
 for (var i = leveldrops.length - 1; i >= 0; i--) {
   if(sessionInv.length != 0){
     for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
-      if(leveldrops[i].drop == sessionInv[ix].drop){
+      if(leveldrops[i].drop.name == sessionInv[ix].drop.name){
         console.log(sessionInv[ix].quantity,leveldrops[i].quantity)
         sessionInv[ix].quantity += leveldrops[i].quantity;
       }
