@@ -70,7 +70,8 @@ function gameStart(){
   players[0].stats.health = players[0].stats.maxHealth
   enemiesLeft = 1
   menuButtons.hide()
-  console.log("Inv length: " + leveldrops.length)
+  console.log("Inv length: " + leveldrops.length) 
+
 }
 
 function draw(){
