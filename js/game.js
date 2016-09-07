@@ -115,35 +115,21 @@ background(255)
 }
 if(enemiesLeft <= 0){
 players[0].stats.totalExp += experience
-for (var i = leveldrops.length - 1; i >= 0; i--) {
-  if(sessionInv.length != 0){
-    for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
-        if(leveldrops[i].item.name == sessionInv[ix].item.name){
-        console.log('items are the same')
-        sessionInv[ix].quantity += leveldrops[i].quantity
-      }
-    }
-  } else {
-    console.log('new item added')
-    sessionInv.push(leveldrops[i]) 
-  }
-}
-console.log(sessionInv)
     firebase.database().ref('players/' + user.uid).on('value', function(snapshot) {
       serverInv = snapshot.val().Inventory
-      for (var i = sessionInv.length - 1; i >= 0; i--) {
+      for (var i = leveldrops.length - 1; i >= 0; i--) {
         if(serverInv.length != 0){
           for (var ix = serverInv.length - 1; ix >= 0; ix--) {
-              if(serverInv[i].item.name == sessionInv[ix].item.name){
-              serverInv[ix].quantity += sessionInv[i].quantity
+              if(leveldrops[i].item.name == serverInv[ix].item.name){
+              serverInv[ix].quantity += leveldrops[i].quantity
             } else {
           console.log('new item added')
-          serverInv.push(sessionInv[i]) 
+          serverInv.push(leveldrops[i]) 
         }
-          }
+      }
         } else {
           console.log('new item added')
-          sessionInv.push(leveldrops[i]) 
+          serverInv.push(leveldrops[i]) 
         }
       }
       console.log(serverInv)
