@@ -123,8 +123,8 @@ for (var i = leveldrops.length - 1; i >= 0; i--) {
   if(sessionInv.length != 0){
     for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
         // sessionInv[ix].quantity += leveldrops[i].quantity;
-      // if(leveldrops[i].drop.name == sessionInv[ix].drop.name){
-        console.log(sessionInv[ix].drop.name,leveldrops[i].drop.name)
+      //
+        console.log(sessionInv[ix],leveldrops[i])
     }
   } else {
     console.log('new item added')
@@ -133,7 +133,7 @@ for (var i = leveldrops.length - 1; i >= 0; i--) {
 }
 console.log('Session inv:')
 console.log(sessionInv)
-firebase.database().ref('players/' + user.uid).push({
+firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP,
                 'Inventory': sessionInv
             });
