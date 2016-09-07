@@ -118,12 +118,14 @@ if(enemiesLeft <= 0){
 console.log(leveldrops)
 players[0].stats.totalExp += experience
 for (var i = leveldrops.length - 1; i >= 0; i--) {
-  for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
-    if(leveldrops[i].drop == sessionInv[ix].drop){
-      sessionInv[ix].quantity += leveldrops[i].quantity;
-    } else { 
-     sessionInv.push(leveldrops[i]) 
+  if(sessionInv.length != 0){
+    for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
+      if(leveldrops[i].drop == sessionInv[ix].drop){
+        sessionInv[ix].quantity += leveldrops[i].quantity;
+      }
     }
+  } else {
+    sessionInv.push(leveldrops[i]) 
   }
 }
 console.log(sessionInv)
