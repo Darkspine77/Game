@@ -66,9 +66,11 @@ function gameStart(){
   gameStatus = 'Playing'
   levelTimer = millis()
   level += 1 
+  leveldrops = [] 
   players[0].stats.health = players[0].stats.maxHealth
   enemiesLeft = 20
   menuButtons.hide()
+  console.log("Inv length: " + leveldrops.length)
 }
 
 function draw(){
