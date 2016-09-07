@@ -117,7 +117,6 @@ gameStatus = "Lose"
 background(255)
 }
 if(enemiesLeft <= 0){
-console.log(leveldrops)
 players[0].stats.totalExp += experience
 for (var i = leveldrops.length - 1; i >= 0; i--) {
   if(sessionInv.length != 0){
@@ -128,10 +127,11 @@ for (var i = leveldrops.length - 1; i >= 0; i--) {
       }
     }
   } else {
+    console.log('new item added')
     sessionInv.push(leveldrops[i]) 
   }
 }
-console.log(sessionInv)
+console.log('Seesion inv: 'sessionInv)
 firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP,
                 'Inventory': sessionInv
