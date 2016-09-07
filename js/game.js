@@ -29,7 +29,7 @@ function displayUser(){
   user = firebase.auth().currentUser
     firebase.database().ref('players/' + user.uid).on('value', function(snapshot) {
       console.log("User data")
-      console.log(snapshot.val())
+      console.log(snapshot.val().SP)
   });
 }
 
