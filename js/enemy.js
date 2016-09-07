@@ -22,7 +22,7 @@ function enemy(x,y,health1){
       kills += 1
       enemiesLeft -= 1
       dropStats = ['This is a test item']
-      drop = new item('resource','test2',dropStats,-1);
+      drop = new item('resource','test',dropStats,-1);
       obj = {
         item: drop,
         quantity: 1
