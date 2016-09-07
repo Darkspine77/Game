@@ -124,7 +124,7 @@ for (var i = leveldrops.length - 1; i >= 0; i--) {
     for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
         // sessionInv[ix].quantity += leveldrops[i].quantity;
       //
-        console.log(sessionInv[ix],leveldrops[i])
+        console.log(leveldrops[i])
     }
   } else {
     console.log('new item added')
