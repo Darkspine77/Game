@@ -122,16 +122,14 @@ players[0].stats.totalExp += experience
 for (var i = leveldrops.length - 1; i >= 0; i--) {
   if(sessionInv.length != 0){
     for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
-        // sessionInv[ix].quantity += leveldrops[i].quantity;
-      //
-        console.log(leveldrops[i])
+        if(leveldrops[i].item.name == sessionInv[ix].item.name)
+        console.log('items are the same')
     }
   } else {
     console.log('new item added')
     sessionInv.push(leveldrops[i]) 
   }
 }
-console.log('Session inv:')
 console.log(sessionInv)
 firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP,
