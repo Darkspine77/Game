@@ -129,7 +129,7 @@ for (var i = leveldrops.length - 1; i >= 0; i--) {
 console.log(sessionInv)
 firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP,
-                'Inventory': sessionInv;
+                'Inventory': sessionInv
             });
 menuButtons.show()
 gameStatus = "Win"
