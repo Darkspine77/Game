@@ -115,7 +115,7 @@ background(255)
 }
 if(enemiesLeft <= 0){
 players[0].stats.totalExp += experience
-    firebase.database().ref('players/' + user.uid).on('value', function(snapshot) {
+    firebase.database().ref('players/' + user.uid).once.('value').then(function(snapshot) {
       serverInv = snapshot.val().Inventory
       for (var i = leveldrops.length - 1; i >= 0; i--) {
         if(serverInv.length != 0){
@@ -138,8 +138,6 @@ players[0].stats.totalExp += experience
                 'Inventory': serverInv
       });
   });
-
-
 menuButtons.show()
 gameStatus = "Win"
 completionTime = Math.round((millis() - levelTimer)/1000)
