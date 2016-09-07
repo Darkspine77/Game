@@ -117,13 +117,13 @@ if(enemiesLeft <= 0){
 players[0].stats.totalExp += experience
     firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
       serverInv = snapshot.val().Inventory
+      console.log(serverInv)
       for (var i = leveldrops.length - 1; i >= 0; i--) {
         if(serverInv.length != 0){
           for (var ix = serverInv.length - 1; ix >= 0; ix--) {
               if(leveldrops[i].item.name == serverInv[ix].item.name){
               serverInv[ix].quantity += leveldrops[i].quantity
             } else {
-          console.log('new item added')
           serverInv.push(leveldrops[i]) 
         }
       }
