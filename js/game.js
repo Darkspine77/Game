@@ -28,10 +28,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 function displayUser(){
   user = firebase.auth().currentUser
-    firebase.database().ref('players/' + user.uid).on('value', function(snapshot) {
-      console.log("User data")
-      console.log(snapshot.val().SP)
-  });
 }
 
 
@@ -133,6 +129,25 @@ for (var i = leveldrops.length - 1; i >= 0; i--) {
   }
 }
 console.log(sessionInv)
+    firebase.database().ref('players/' + user.uid).on('value', function(snapshot) {
+      serverInv = snapshot.val().Inventory
+      for (var i = sessionInv.length - 1; i >= 0; i--) {
+        if(serverInv.length != 0){
+          for (var ix = serverInv.length - 1; ix >= 0; ix--) {
+              if(serverInv[i].item.name == sessionInv[ix].item.name){
+              serverInv[ix].quantity += sessionInv[i].quantity
+            } else {
+          console.log('new item added')
+          serverInv.push(sessionInv[i]) 
+        }
+          }
+        } else {
+          console.log('new item added')
+          sessionInv.push(leveldrops[i]) 
+        }
+      }
+  });
+console.log(serverInv)
 firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP,
                 'Inventory': sessionInv
