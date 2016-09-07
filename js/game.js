@@ -68,7 +68,7 @@ function gameStart(){
   level += 1 
   leveldrops = [] 
   players[0].stats.health = players[0].stats.maxHealth
-  enemiesLeft = 20
+  enemiesLeft = 1
   menuButtons.hide()
   console.log("Inv length: " + leveldrops.length)
 }
@@ -123,6 +123,7 @@ for (var i = leveldrops.length - 1; i >= 0; i--) {
   if(sessionInv.length != 0){
     for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
       if(leveldrops[i].drop == sessionInv[ix].drop){
+        console.log(sessionInv[ix].quantity,leveldrops[i].quantity)
         sessionInv[ix].quantity += leveldrops[i].quantity;
       }
     }
