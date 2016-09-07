@@ -26,8 +26,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 function displayUser(){
-  user =firebase.auth().currentUser
-    firebase.database().ref('players/' + + user.uid).on('value', function(snapshot) {
+  user = firebase.auth().currentUser
+    firebase.database().ref('players/' + user.uid).on('value', function(snapshot) {
       console.log("User data")
       console.log(snapshot.val())
   });
@@ -114,9 +114,8 @@ gameStatus = "Lose"
 background(255)
 }
 if(enemiesLeft <= 0){
-
 console.log(leveldrops)
-player[0].stats.totalExp += experience
+players[0].stats.totalExp += experience
 firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP
             });
