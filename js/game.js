@@ -133,12 +133,13 @@ players[0].stats.totalExp += experience
         }
       }
       console.log(serverInv)
+      firebase.database().ref('players/' + user.uid).set({
+                'SP': currentSP,
+                'Inventory': serverInv
+      });
   });
 
-firebase.database().ref('players/' + user.uid).set({
-                'SP': currentSP,
-                'Inventory': sessionInv
-            });
+
 menuButtons.show()
 gameStatus = "Win"
 completionTime = Math.round((millis() - levelTimer)/1000)
