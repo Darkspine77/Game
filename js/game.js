@@ -30,7 +30,7 @@ function displayUser(){
     firebase.database().ref('players/' + + user.uid).on('value', function(snapshot) {
       console.log("User data")
       console.log(snapshot)
-  }
+  });
 }
 
 
