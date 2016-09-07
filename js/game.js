@@ -124,7 +124,7 @@ for (var i = leveldrops.length - 1; i >= 0; i--) {
     for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
         if(leveldrops[i].item.name == sessionInv[ix].item.name){
         console.log('items are the same')
-        sessionInv[ix].quantity += leveldrops[I].quantity
+        sessionInv[ix].quantity += leveldrops[i].quantity
       }
     }
   } else {
