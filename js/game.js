@@ -122,8 +122,10 @@ players[0].stats.totalExp += experience
 for (var i = leveldrops.length - 1; i >= 0; i--) {
   if(sessionInv.length != 0){
     for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
-        if(leveldrops[i].item.name == sessionInv[ix].item.name)
+        if(leveldrops[i].item.name == sessionInv[ix].item.name){
         console.log('items are the same')
+        sessionInv[ix].quantity += leveldrops[x].quantity
+      }
     }
   } else {
     console.log('new item added')
