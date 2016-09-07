@@ -110,7 +110,8 @@ gameStatus = "Lose"
 background(255)
 }
 if(enemiesLeft <= 0){
-  firebase.database().ref('players/' + user.uid).push({
+console.log(leveldrops)
+firebase.database().ref('players/' + user.uid).push({
                 'SP': currentSP
             });
 menuButtons.show()
