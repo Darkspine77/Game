@@ -16,6 +16,7 @@ currentSP = null
 totalExp = 0
 userloaded = false
 user = null
+sessionInv = []
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
   displayUser()
@@ -116,8 +117,19 @@ background(255)
 if(enemiesLeft <= 0){
 console.log(leveldrops)
 players[0].stats.totalExp += experience
+for (var i = leveldrops.length - 1; i >= 0; i--) {
+  for (var ix = sessionInv.length - 1; ix >= 0; ix--) {
+    if(leveldrops[i].drop == sessionInv[ix].drop){
+      sessionInv[ix].quantity += leveldrops[i].quantity;
+    } else { 
+     sessionInv.push(leveldrops[i]) 
+    }
+  }
+}
+console.log(sessionInv)
 firebase.database().ref('players/' + user.uid).set({
-                'SP': currentSP
+                'SP': currentSP,
+                'Inventory': sessionInv;
             });
 menuButtons.show()
 gameStatus = "Win"
