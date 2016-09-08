@@ -63,7 +63,7 @@ players.push(player)
 function showInv(){
   console.log("test");
 inv.show();
-showinv.mousePressed(hideInv);   
+//showinv.mousePressed(hideInv);   
 document.getElementById('showinv').textContent = 'Hide Inventory';
 firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {  
 shownInv = snapshot.val().Inventory 
@@ -78,7 +78,7 @@ shownInv = snapshot.val().Inventory
 
 function hideInv(){
 inv.hide()
-showinv.mousePressed(showInv);   
+//showinv.mousePressed(showInv);   
 document.getElementById('showinv').textContent = 'Show Inventory';     // Show
 }
 
