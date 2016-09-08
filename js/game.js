@@ -64,26 +64,15 @@ function showInv(){
 inv.show()
 
 showinv.mousePressed(hideInv);   
-document.getElementById('showinv').textContent = 'Hide Inventory';     
-shownInv = getServerInv()
-for (var i = shownInv.length - 1; i >= 0; i--) {
-  $("inventory").prepend(
+document.getElementById('showinv').textContent = 'Hide Inventory';
+firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {  
+showInv = snapshot.val().Inventory   
+  for (var i = shownInv.length - 1; i >= 0; i--) {
+   $("inventory").prepend(
                         '<div id=""><h1>' + shownInv[i].item.name + '</h1><p> Amount: ' + shownInv[i].quantity + '</p></div>'
                   );
-
-  }
-}
-
-function getServerInv(){
-    inv = null
-      firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
-        inv = snapshot.val().Inventory
-     });   
-      if(inv == null){
-        console.log("error: no inventory recieved")
-      } else {
-      return inv 
     }
+  });   
 }
 
 function hideInv(){
