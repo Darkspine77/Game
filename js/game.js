@@ -35,7 +35,8 @@ function setup(){   // Hide
 currentSP = new statProfile()
 gameStatus = "Menu"
 canvas = createCanvas(windowWidth,windowHeight)
-canvas.parent('canvas');  
+canvas.parent('canvas');
+canvas.hide()  
 ground = createSprite(windowWidth/2,windowHeight,windowWidth,50)
 terrain.push(ground)
 player = new player(windowWidth/2,windowHeight/2)
@@ -49,14 +50,51 @@ players.push(player)
   start.id('start')
   start.parent('menuButtons')
   start.mousePressed(gameStart);
-  stats = createButton('View Stats');
-  stats.id('stats')
-  stats.parent('menuButtons')
-  stats.mousePressed(gameStart);
+  showinv = createButton('View Inventory');
+  showinv.id('showinv')
+  showinv.parent('menuButtons')
+  showinv.mousePressed(showInv);
+  inv = createDiv('');
+  inv.id('inventory')
+  inv.hide()
     menuButtons.show()
 }
 
+function showInv(){
+inv.show()
+
+showinv.mousePressed(hideInv);   
+document.getElementById('showinv').textContent = 'Hide Inventory';     
+shownInv = getServerInv()
+for (var i = shownInv.length - 1; i >= 0; i--) {
+  $("inventory").prepend(
+                        '<div id=""><h1>' + shownInv[i].item.name + '</h1><p> Amount: ' + shownInv[i].quantity + '</p></div>'
+                  );
+
+  }
+}
+
+function getServerInv(){
+    inv = null
+      firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
+        inv = snapshot.val().Inventory
+     });   
+      if(inv == null){
+        console.log("error: no inventory recieved")
+      } else {
+      return inv 
+    }
+}
+
+function hideInv(){
+inv.hide()
+showinv.mousePressed(showInv);   
+document.getElementById('showinv').textContent = 'Show Inventory';     // Show
+}
+
+
 function gameStart(){
+  canvas.show()
   experience = 0
   document.getElementById('results').textContent = ""
   gameStatus = 'Playing'
@@ -116,6 +154,7 @@ gameStatus = "Lose"
 background(255)
 }
 if(enemiesLeft <= 0){
+canvas.hide()
 players[0].stats.totalExp += experience
     firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
       serverInv = snapshot.val().Inventory

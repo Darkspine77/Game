@@ -7,3 +7,13 @@
  border-width: 2px;
  border-style: solid;
 }
+
+#inventory{
+    border: 13px solid #bed5cd;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+#inventory div {
+    display: inline;
+}
