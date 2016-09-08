@@ -78,7 +78,7 @@ console.log(shownInv)
 }
 
 function hideInv(){
-    $('#inventory').text('');
+$('#inventory').html('');
 inv.hide()
 showinv.mousePressed(showInv);   
 document.getElementById('showinv').textContent = 'Show Inventory';     // Show
