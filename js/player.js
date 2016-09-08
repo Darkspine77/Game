@@ -40,7 +40,7 @@ function player(x,y){
       if(this.facing == 'R'){
         dir = 1 * this.stats.bulletSpeed
       }
-      pellets.push(new pellet(this.sprite.position.x,this.sprite.position.y,dir,0,1))
+      pellets.push(new pellet(this.sprite.position.x,this.sprite.position.y,dir,0,this.stats.damage))
       this.shootDelay = millis() + this.stats.fireDelay
     }
   }

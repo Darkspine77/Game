@@ -69,9 +69,15 @@ firebase.database().ref('players/' + user.uid).once('value').then(function(snaps
 shownInv = snapshot.val().Inventory 
   for (var i = shownInv.length - 1; i >= 0; i--) {
     console.log('added item')
-   $("#inventory").append(
-          '<div class=" item "><h1>' + shownInv[i].item.name + '</h1><p> Amount: ' + shownInv[i].quantity + '</p></div>'
+        if(shownInv[i].item.def == "resource"){
+            $("#inventory").append(
+            '<div class=" item "><h1>' + shownInv[i].item.name + '</h1><p> Amount: ' + shownInv[i].quantity + '</p></div>'
         );
+        } else if (shownInv[i].item.def == "firearm"){
+            $("#inventory").append(
+            '<div class=" item "><h1>' + shownInv[i].item.name + '</h1><p>' + shownInv[i].item.stats.description + '</p><p> Rate Of Fire: ' + shownInv[i].item.stats.fireDelay + '</p><p> Damage: ' + shownInv[i].item.stats.damage + '</p><p> Bullet Speed: ' + shownInv[i].item.stats.bulletSpeed + '</p><p> Amount: ' + shownInv[i].quantity + '</p><button onClick="primaryEquip()">Equip This as Primary Weapon</button></div>'
+        );
+        }
     }
   });
 }
@@ -92,9 +98,11 @@ function gameStart(){
   level += 1 
   leveldrops = [] 
   adding = []
+  pellets = []
+  enemies = []
   console.log(adding)
   players[0].stats.health = players[0].stats.maxHealth
-  enemiesLeft = 1
+  enemiesLeft = 5
   menuButtons.hide()
   console.log("Inv length: " + leveldrops.length) 
 
@@ -173,7 +181,7 @@ players[0].stats.totalExp += experience
 menuButtons.show()
 gameStatus = "Win"
 completionTime = Math.round((millis() - levelTimer)/1000)
-document.getElementById('results').textContent = "You completed the level in " + completionTime + "seconds! You gained " + experience + " from this level and now have " + totalExp + " experience."
+document.getElementById('results').textContent = "You completed the level in " + completionTime + "seconds! You gained " + experience + " from this level and now have " + players[0].stats.totalExp + " experience."
 }
 }
 
@@ -187,7 +195,7 @@ if(millis() > spawnTimer){
   if(choice == 2){
   xpos = 50
   }
-  enemies.push(new enemy(xpos,windowHeight/2,1))
+  enemies.push(new enemy(xpos,windowHeight/2,3))
   spawnTimer = millis() + 1000 
 }
 }
@@ -195,9 +203,9 @@ if(millis() > spawnTimer){
 function statProfile(){
   this.maxHealth = 10
   this.health = this.maxHealth
-  this.fireDelay = 1000
+  this.fireDelay = 250
   this.damage = 1
-  this.bulletSpeed = 3 
+  this.bulletSpeed = 9 
   this.totalExp = 0
 }
 

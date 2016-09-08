@@ -21,8 +21,13 @@ function enemy(x,y,health1){
       enemies.splice(enemies.indexOf(this),1)
       kills += 1
       enemiesLeft -= 1
-      dropStats = ['This is a test item']
-      drop = new item('resource','test',dropStats,-1);
+      dropStats = {
+          'description': "This item is a test gun",
+          'fireDelay': 1000,
+          'damage': 1,
+          'bulletSpeed': 3
+      }
+      drop = new item('firearm','guntest',dropStats,-1);
       obj = {
         item: drop,
         quantity: 1
