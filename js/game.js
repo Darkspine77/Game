@@ -123,6 +123,7 @@ players[0].stats.totalExp += experience
             if(serverInv[ix].item.name == leveldrops[i].item.name){
               serverInv[ix].quantity += leveldrops[i].quantity
             } else {
+              console.log(adding.indexOf(leveldrops[i]))
               flag = adding.indexOf(leveldrops[i]) >= 0
               if(!flag){
           adding.push(leveldrops[i])
@@ -130,10 +131,11 @@ players[0].stats.totalExp += experience
         }
       }
     }
+    console.log(adding)
     for (var i = adding.length - 1; i >= 0; i--) {
       serverInv.push(adding[i])
     }
-      console.log(serverInv)
+
       firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP,
                 'Inventory': serverInv
