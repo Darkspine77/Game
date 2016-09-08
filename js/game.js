@@ -64,6 +64,7 @@ function gameStart(){
   level += 1 
   leveldrops = [] 
   adding = []
+  console.log(adding)
   players[0].stats.health = players[0].stats.maxHealth
   enemiesLeft = 1
   menuButtons.hide()
@@ -120,17 +121,18 @@ players[0].stats.totalExp += experience
       serverInv = snapshot.val().Inventory
       console.log(serverInv)
       for (var i = leveldrops.length - 1; i >= 0; i--) {
+          exists = false
           for (var ix = serverInv.length - 1; ix >= 0; ix--) {
             if(serverInv[ix].item.name == leveldrops[i].item.name){
               serverInv[ix].quantity += leveldrops[i].quantity
-            } else {
-              console.log(adding.indexOf(leveldrops[i]))
-              flag = adding.indexOf(leveldrops[i]) >= 0
-              if(!flag){
+              exists = true
+            }
+          }
+            flag = adding.indexOf(leveldrops[i]) >= 0
+            if(!flag && !exists){
           console.log('added to adding')
           adding.push(leveldrops[i])
           }
-        }
       }
     }
     console.log(adding)
