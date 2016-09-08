@@ -16,6 +16,7 @@ currentSP = null
 totalExp = 0
 userloaded = false
 user = null
+adding = []
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
   displayUser()
@@ -117,15 +118,18 @@ players[0].stats.totalExp += experience
     firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
       serverInv = snapshot.val().Inventory
       console.log(serverInv)
-      for (var i = serverInv.length - 1; i >= 0; i--) {
-          for (var ix = leveldrops.length - 1; ix >= 0; ix--) {
-              if(serverInv[i].item.name == leveldrops[ix].item.name){
-              serverInv[i].quantity += leveldrops[ix].quantity
-            } else if(ix == 0){
-          serverInv.push(leveldrops[i]) 
+      for (var i = leveldrops.length - 1; i >= 0; i--) {
+          for (var ix = serverInv.length - 1; ix >= 0; ix--) {
+            if(serverInv[ix].item.name == leveldrops[i].item.name){
+              serverInv[ix].quantity += leveldrops[i].quantity
+            } else {
+              flag = adding.indexOf(leveldrops[i]) >= 0
+              if(!flag){
+          adding.push(leveldrops[i])
+          }
         }
       }
-      }
+    }
       console.log(serverInv)
       firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP,
