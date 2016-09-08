@@ -130,6 +130,9 @@ players[0].stats.totalExp += experience
         }
       }
     }
+    for (var i = adding.length - 1; i >= 0; i--) {
+      serverInv.push(adding[i])
+    }
       console.log(serverInv)
       firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP,
