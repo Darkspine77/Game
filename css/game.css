@@ -8,7 +8,7 @@
  border-style: solid;
 }
 
-#inventory{
+/*#inventory{
     border: 13px solid #bed5cd;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -16,4 +16,4 @@
 }
 #inventory div {
     display: inline;
-}
+}*/

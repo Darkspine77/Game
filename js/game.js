@@ -69,8 +69,9 @@ firebase.database().ref('players/' + user.uid).once('value').then(function(snaps
 shownInv = snapshot.val().Inventory 
 console.log(shownInv)  
   for (var i = shownInv.length - 1; i >= 0; i--) {
+    console.log('added item')
    $("inventory").append(
-                        '<div id=""><h1>' + shownInv[i].item.name + '</h1><p> Amount: ' + shownInv[i].quantity + '</p></div>'
+                      '<div id=""><h1>' + shownInv[i].item.name + '</h1><p> Amount: ' + shownInv[i].quantity + '</p></div>'
                   );
     }
   });   
