@@ -126,7 +126,7 @@ players[0].stats.totalExp += experience
           serverInv.push(leveldrops[i]) 
         }
       }
-      =}
+      }
       console.log(serverInv)
       firebase.database().ref('players/' + user.uid).set({
                 'SP': currentSP,
