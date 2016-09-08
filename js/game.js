@@ -119,7 +119,6 @@ if(enemiesLeft <= 0){
 players[0].stats.totalExp += experience
     firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
       serverInv = snapshot.val().Inventory
-      console.log(serverInv)
       for (var i = leveldrops.length - 1; i >= 0; i--) {
           exists = false
           for (var ix = serverInv.length - 1; ix >= 0; ix--) {
@@ -130,11 +129,9 @@ players[0].stats.totalExp += experience
           }
             flag = adding.indexOf(leveldrops[i]) >= 0
             if(!flag && !exists){
-          console.log('added to adding')
           adding.push(leveldrops[i])
           }
       }
-    console.log(adding)
     for (var i = adding.length - 1; i >= 0; i--) {
       serverInv.push(adding[i])
     }
