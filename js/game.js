@@ -61,20 +61,18 @@ players.push(player)
 }
 
 function showInv(){
-$('#inventory').empty();
-inv.show()
+inv.show();
 showinv.mousePressed(hideInv);   
 document.getElementById('showinv').textContent = 'Hide Inventory';
 firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {  
 shownInv = snapshot.val().Inventory 
-console.log(shownInv)  
   for (var i = shownInv.length - 1; i >= 0; i--) {
     console.log('added item')
    $("#inventory").append(
           '<div class=" item "><h1>' + shownInv[i].item.name + '</h1><p> Amount: ' + shownInv[i].quantity + '</p></div>'
         );
     }
-  });   
+  });
 }
 
 function hideInv(){
