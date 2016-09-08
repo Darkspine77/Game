@@ -121,7 +121,7 @@ players[0].stats.totalExp += experience
           for (var ix = leveldrops.length - 1; ix >= 0; ix--) {
               if(serverInv[i].item.name == leveldrops[ix].item.name){
               serverInv[i].quantity += leveldrops[ix].quantity
-            } else if(i == 0){
+            } else if(ix == 0){
           serverInv.push(leveldrops[i]) 
         }
       }
