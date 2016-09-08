@@ -53,7 +53,7 @@ players.push(player)
   showinv = createButton('View Inventory');
   showinv.id('showinv')
   showinv.parent('menuButtons')
-  showinv.mousePressed(showInv);
+  //showinv.mousePressed(showInv);
   inv = createDiv('');
   inv.id('inventory')
   inv.hide()
