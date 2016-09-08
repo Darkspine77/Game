@@ -127,6 +127,7 @@ players[0].stats.totalExp += experience
               console.log(adding.indexOf(leveldrops[i]))
               flag = adding.indexOf(leveldrops[i]) >= 0
               if(!flag){
+          console.log('added to adding')
           adding.push(leveldrops[i])
           }
         }
