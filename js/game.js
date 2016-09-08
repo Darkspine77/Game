@@ -134,7 +134,6 @@ players[0].stats.totalExp += experience
           adding.push(leveldrops[i])
           }
       }
-    }
     console.log(adding)
     for (var i = adding.length - 1; i >= 0; i--) {
       serverInv.push(adding[i])
