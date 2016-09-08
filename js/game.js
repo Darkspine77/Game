@@ -16,7 +16,6 @@ currentSP = null
 totalExp = 0
 userloaded = false
 user = null
-sessionInv = []
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
   displayUser()
@@ -121,7 +120,7 @@ players[0].stats.totalExp += experience
       for (var i = serverInv.length - 1; i >= 0; i--) {
           for (var ix = leveldrops.length - 1; ix >= 0; ix--) {
               if(serverInv[i].item.name == leveldrops[ix].item.name){
-              serverInv[ix].quantity += leveldrops[i].quantity
+              serverInv[i].quantity += leveldrops[ix].quantity
             } else if(i == 0){
           serverInv.push(leveldrops[i]) 
         }
