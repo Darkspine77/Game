@@ -63,6 +63,7 @@ function gameStart(){
   levelTimer = millis()
   level += 1 
   leveldrops = [] 
+  adding = []
   players[0].stats.health = players[0].stats.maxHealth
   enemiesLeft = 1
   menuButtons.hide()
