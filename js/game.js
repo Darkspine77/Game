@@ -61,6 +61,7 @@ players.push(player)
 }
 
 function showInv(){
+  console.log("test");
 inv.show();
 showinv.mousePressed(hideInv);   
 document.getElementById('showinv').textContent = 'Hide Inventory';
