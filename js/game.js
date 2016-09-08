@@ -118,7 +118,7 @@ players[0].stats.totalExp += experience
     firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
       serverInv = snapshot.val().Inventory
       console.log(serverInv)
-      for (var i = sessionInv.length - 1; i >= 0; i--) {
+      for (var i = serverInv.length - 1; i >= 0; i--) {
           for (var ix = leveldrops.length - 1; ix >= 0; ix--) {
               if(serverInv[i].item.name == leveldrops[ix].item.name){
               serverInv[ix].quantity += leveldrops[i].quantity
