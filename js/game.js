@@ -70,7 +70,7 @@ shownInv = snapshot.val().Inventory
 console.log(shownInv)  
   for (var i = shownInv.length - 1; i >= 0; i--) {
     console.log('added item')
-   $("inventory").append(
+   $("#inventory").append(
                       '<div><h1>' + shownInv[i].item.name + '</h1><p> Amount: ' + shownInv[i].quantity + '</p></div>'
                   );
     }
