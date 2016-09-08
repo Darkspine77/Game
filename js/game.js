@@ -66,8 +66,8 @@ inv.show()
 showinv.mousePressed(hideInv);   
 document.getElementById('showinv').textContent = 'Hide Inventory';
 firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {  
-showInv = snapshot.val().Inventory 
-console.log(showInv)  
+shownInv = snapshot.val().Inventory 
+console.log(shownInv)  
   for (var i = shownInv.length - 1; i >= 0; i--) {
    $("inventory").prepend(
                         '<div id=""><h1>' + shownInv[i].item.name + '</h1><p> Amount: ' + shownInv[i].quantity + '</p></div>'
