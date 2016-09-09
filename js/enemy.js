@@ -27,8 +27,8 @@ function enemy(x,y,health1){
           'damage': 1,
           'bulletSpeed': 3
       }
-      drop = new item('firearm','guntest',dropStats,-1);
-      obj = {
+      var drop = new item('firearm','guntest',dropStats,-1);
+      var obj = {
         item: drop,
         quantity: 1
       };
@@ -41,6 +41,7 @@ function enemy(x,y,health1){
           }
         }
       } else {
+        console.log(obj)
         leveldrops.push(obj)
       }
       experience += this.maxHealth

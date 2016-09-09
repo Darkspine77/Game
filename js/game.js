@@ -29,13 +29,28 @@ function displayUser(){
   user = firebase.auth().currentUser
   firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
   var SP 
-  if(snapshot.val().SP != null){
+  var GSP
+  if(snapshot.val() != null){
       SP = snapshot.val().SP
+      GSP = snapshot.val().Primary
   } else {
       SP = new statProfile()
+      gs = {
+          'description': "This item is a test gun",
+          'fireDelay': 50,
+          'damage': .25,
+          'bulletSpeed': 12
+      }
+      drop = new item('firearm','guntest',gs,-1)
+      obj = {
+        item: drop,
+        quantity: 1
+      };
+      GSP = obj
   }
-  player = new player(width/2,height/2,SP)
+  player = new player(width/2,height/2,SP,GSP)
   players.push(player)
+  menuButtons.show()
   });
 }
 
@@ -51,6 +66,7 @@ terrain.push(ground)
 
 
   menuButtons = createDiv('')
+  menuButtons.hide()
   menuButtons.id('menuButtons')
   menuButtons.parent('HUD')
   start = createButton('Start Level');
@@ -64,7 +80,6 @@ terrain.push(ground)
   inv = createDiv('');
   inv.id('inventory')
   inv.hide()
-    menuButtons.show()
 }
 
 function showInv(){
@@ -82,7 +97,7 @@ shownInv = snapshot.val().Inventory
         );
         } else if (shownInv[i].item.def == "firearm"){
             $("#inventory").append(
-            '<div class=" item "><h1>' + shownInv[i].item.name + '</h1><p>' + shownInv[i].item.stats.description + '</p><p> Rate Of Fire: ' + shownInv[i].item.stats.fireDelay + '</p><p> Damage: ' + shownInv[i].item.stats.damage + '</p><p> Bullet Speed: ' + shownInv[i].item.stats.bulletSpeed + '</p><p> Amount: ' + shownInv[i].quantity + '</p><button onClick="primaryEquip()">Equip This as Primary Weapon</button></div>'
+            '<div class=" item "><h1>' + shownInv[i].item.name + '</h1><p>' + shownInv[i].item.stats.description + '</p><p> Rate Of Fire: ' + shownInv[i].item.stats.fireDelay + '</p><p> Damage: ' + shownInv[i].item.stats.damage + '</p><p> Bullet Speed: ' + shownInv[i].item.stats.bulletSpeed + '</p><p> Amount: ' + shownInv[i].quantity + '</p><button onClick="primaryEquip(' + i + ')">Equip This as Primary Weapon</button></div>'
         );
         }
     }
@@ -95,6 +110,19 @@ inv.hide()
 document.getElementById('showinv').textContent = 'Show Inventory';     // Show
 }
 
+function primaryEquip(weaponInd){
+firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
+        shownInv = snapshot.val().Inventory 
+        weapon = shownInv[weaponInd];
+        weapon.quantity = 1
+        players[0].Primary = weapon
+              firebase.database().ref('players/' + user.uid).set({
+                    'Primary': players[0].Primary,
+                    'SP': snapshot.val().SP,
+                    'Inventory': shownInv
+          });
+      });  
+}
 
 function gameStart(){
   canvas.show()
@@ -162,6 +190,7 @@ if(enemiesLeft <= 0){
 canvas.hide()
 players[0].stats.totalExp += experience
     firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
+    if(snapshot.val() != null){
       serverInv = snapshot.val().Inventory
       for (var i = leveldrops.length - 1; i >= 0; i--) {
           exists = false
@@ -176,11 +205,16 @@ players[0].stats.totalExp += experience
           adding.push(leveldrops[i])
           }
       }
+    } else {
+        serverInv = []
+        adding = leveldrops
+    }
     for (var i = adding.length - 1; i >= 0; i--) {
       serverInv.push(adding[i])
     }
 
       firebase.database().ref('players/' + user.uid).set({
+                'Primary': players[0].Primary,
                 'SP': players[0].stats,
                 'Inventory': serverInv
       });
@@ -210,9 +244,6 @@ if(millis() > spawnTimer){
 function statProfile(){
   this.maxHealth = 10
   this.health = this.maxHealth
-  this.fireDelay = 50
-  this.damage = .25
-  this.bulletSpeed = 15 
   this.totalExp = 0
 }
 
