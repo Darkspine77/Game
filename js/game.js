@@ -12,7 +12,6 @@ spawnTimer = 0
 gameStatus = ""
 levelTimer = 0
 completionTime = 0
-currentSP = null
 totalExp = 0
 userloaded = false
 user = null
@@ -28,19 +27,27 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 function displayUser(){
   user = firebase.auth().currentUser
+  firebase.database().ref('players/' + user.uid).once('value').then(function(snapshot) {
+  var SP 
+  if(snapshot.val().SP != null){
+      SP = snapshot.val().SP
+  } else {
+      SP = new statProfile()
+  }
+  player = new player(windowWidth/2,windowHeight/2,SP)
+  players.push(player)
+  });
 }
 
 
 function setup(){   // Hide
-currentSP = new statProfile()
 gameStatus = "Menu"
 canvas = createCanvas(windowWidth,windowHeight)
 canvas.parent('canvas');
 canvas.hide()  
 ground = createSprite(windowWidth/2,windowHeight,windowWidth,50)
 terrain.push(ground)
-player = new player(windowWidth/2,windowHeight/2)
-players.push(player)
+
 
 
   menuButtons = createDiv('')
@@ -174,7 +181,7 @@ players[0].stats.totalExp += experience
     }
 
       firebase.database().ref('players/' + user.uid).set({
-                'SP': currentSP,
+                'SP': players[0].stats,
                 'Inventory': serverInv
       });
   });
@@ -203,9 +210,9 @@ if(millis() > spawnTimer){
 function statProfile(){
   this.maxHealth = 10
   this.health = this.maxHealth
-  this.fireDelay = 250
-  this.damage = 1
-  this.bulletSpeed = 9 
+  this.fireDelay = 50
+  this.damage = .25
+  this.bulletSpeed = 15 
   this.totalExp = 0
 }
 

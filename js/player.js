@@ -1,4 +1,4 @@
-function player(x,y){
+function player(x,y,SP){
   this.sprite = createSprite(x,y,25,25) 
   this.size1 = 25
   this.xvel = 0
@@ -8,7 +8,7 @@ function player(x,y){
       'x': 0,
     }
   this.shootDelay = 0
-  this.stats = currentSP
+  this.stats = SP
   console.log(this.stats)
 
   this.run = function(){
