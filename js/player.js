@@ -9,9 +9,7 @@ function player(x,y,SP,GSP){
     }
   this.shootDelay = 0
   this.stats = SP
-  console.log(this.stats)
   this.Primary = GSP
-  this.gunStats = GSP.item.stats
 
   this.run = function(){
     this.move() 
@@ -37,13 +35,13 @@ function player(x,y,SP,GSP){
     if(millis() > this.shootDelay && pressed){
       dir = 0
       if(this.facing == 'L'){
-        dir = -1 * this.gunStats.bulletSpeed
+        dir = -1 * this.Primary.item.stats.bulletSpeed
       }
       if(this.facing == 'R'){
-        dir = 1 * this.gunStats.bulletSpeed
+        dir = 1 * this.Primary.item.stats.bulletSpeed
       }
-      pellets.push(new pellet(this.sprite.position.x,this.sprite.position.y,dir,0,this.gunStats.damage))
-      this.shootDelay = millis() + this.gunStats.fireDelay
+      pellets.push(new pellet(this.sprite.position.x,this.sprite.position.y,dir,0,this.Primary.item.stats.damage))
+      this.shootDelay = millis() + this.Primary.item.stats.fireDelay
     }
   }
 

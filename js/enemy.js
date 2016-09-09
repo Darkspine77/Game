@@ -27,14 +27,14 @@ function enemy(x,y,health1){
           'damage': 1,
           'bulletSpeed': 3
       }
-      var drop = new item('firearm','guntest',dropStats,-1);
+      var drop = new item('firearm','guntest',dropStats,-1)
       var obj = {
         item: drop,
         quantity: 1
       };
       if(leveldrops.length != 0){
         for (var i = leveldrops.length - 1; i >= 0; i--) {
-          if(leveldrops[i].drop = drop){
+          if(leveldrops[i].item = drop){
             leveldrops[i].quantity += obj.quantity
           } else {
             leveldrops.push(obj)

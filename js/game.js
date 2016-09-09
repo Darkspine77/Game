@@ -116,6 +116,7 @@ firebase.database().ref('players/' + user.uid).once('value').then(function(snaps
         weapon = shownInv[weaponInd];
         weapon.quantity = 1
         players[0].Primary = weapon
+        console.log(players[0].Primary)
               firebase.database().ref('players/' + user.uid).set({
                     'Primary': players[0].Primary,
                     'SP': snapshot.val().SP,
