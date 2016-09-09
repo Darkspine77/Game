@@ -34,7 +34,7 @@ function displayUser(){
   } else {
       SP = new statProfile()
   }
-  player = new player(windowWidth/2,windowHeight/2,SP)
+  player = new player(width/2,height/2,SP)
   players.push(player)
   });
 }
@@ -202,7 +202,7 @@ if(millis() > spawnTimer){
   if(choice == 2){
   xpos = 50
   }
-  enemies.push(new enemy(xpos,windowHeight/2,3))
+  enemies.push(new enemy(xpos,height/2,3))
   spawnTimer = millis() + 1000 
 }
 }
